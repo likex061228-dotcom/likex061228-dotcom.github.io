@@ -4,14 +4,14 @@ const projects = {
   balance: {
     index: '01 / CONTROL & VISION', title: '车载平衡滚球运动控制系统',
     tags: ['省级三等奖', 'STM32F407', 'MaixCAM', 'PD 控制'],
-    intro: '河北省电子设计竞赛 H 题项目。在小车运动与循迹的同时，通过视觉位置反馈调节平台，让球的位置控制与底盘运动协同工作。',
+    intro: '河北省电子设计竞赛 H 题项目。在小车运动与循迹的同时，通过视觉位置反馈调节水管一端高度，让球的位置控制与底盘运动协同工作。',
     sections: [
       ['问题与目标', '将视觉检测、平衡平台和小车循迹整合为一个系统。单个模块能够工作之后，还需要处理通信、控制节拍、任务切换与停车收尾。'],
-      ['系统如何连接', 'MaixCAM 输出球的位置；STM32F407 接收坐标并执行 PD 控制；步进电机和驱动器调节平台。红外巡线、直流电机与姿态传感器共同参与底盘控制。'],
+      ['系统如何连接', 'MaixCAM 输出球的位置；STM32F407 接收坐标并执行 PD 控制；水管左端固定铰接，右端由步进电机通过曲柄连杆升降；摄像头位于水管上方，光电循迹传感器位于底盘下方。红外巡线、直流电机与姿态传感器共同参与底盘控制。'],
       ['实现中的重点', '将视觉串口数据、控制计算和执行机构连成闭环，组织不同任务下的菜单与状态切换，并处理停止后的平台复位。具体控制逻辑可从 main.c、pid.c 和视觉脚本阅读。'],
       ['项目收获', '一次从器件、算法走向系统联调的实践。比起只看某个模块，更需要关注各部分连接之后的反馈和相互影响。']
     ],
-    flow: '视觉检测 → 位置反馈 → PD 控制 → 平台执行 → 再次观测',
+    flow: '视觉检测 → 位置反馈 → PD 控制 → 水管单端升降 → 再次观测',
     source: 'balance-source.zip', size: '约 7.3 MB',
     note: '省级三等奖由项目作者提供。源码为整理快照，未在本次整理中重新编译或进行硬件验证；不将任务要求中的时间、误差阈值表述为实测成绩。'
   },
@@ -41,7 +41,7 @@ const projects = {
     ],
     flow: '姿态采集 → 动作处理 → 光点运动 → 点阵刷新',
     source: 'matrix-source.zip', size: '约 0.9 MB',
-    note: '页面的点阵图是效果示意，不是硬件录像。源码包未包含原始测试视频、桌面截图或备份；本次未重新进行固件编译与硬件验证。'
+    note: '网页演示保留 32×8 格点与64颗光点，交互效果为原理示意，不是原固件仿真或硬件录像。源码包未包含原始测试视频、桌面截图或备份；本次未重新进行固件编译与硬件验证。'
   },
   workflow: {
     index: '04 / TOOLS & METHODS', title: '数学建模竞赛工作流',
@@ -62,83 +62,109 @@ const projects = {
 const dialog = document.getElementById('project-dialog');
 const dialogContent = document.getElementById('dialog-content');
 let previousFocus = null;
+let disposeLab = null;
+let currentProject = null;
+const heroLab = window.LikeBalanceLab.mount(document.getElementById('hero-lab'), {compact:true});
+const previewHost = document.createElement('div');
+const disposePreview = window.LikeBalanceLab.mount(previewHost, {compact:true});
+const previewSvg = previewHost.querySelector('.balance-svg').cloneNode(true);
+document.getElementById('balance-card-preview').append(previewSvg);
+disposePreview();
 
-document.querySelectorAll('[data-project]').forEach(button => {
-  button.addEventListener('click', () => {
-    const project = projects[button.dataset.project];
-    previousFocus = button;
-    document.getElementById('dialog-index').textContent = project.index;
-    dialogContent.replaceChildren();
-    const title = document.createElement('h2');
-    title.id = 'dialog-title';
-    title.textContent = project.title;
-    dialogContent.append(title);
-    const tags = document.createElement('div');
-    tags.className = 'detail-tags';
-    project.tags.forEach(text => { const tag = document.createElement('span'); tag.textContent = text; tags.append(tag); });
-    dialogContent.append(tags);
-    const intro = document.createElement('p');
-    intro.textContent = project.intro;
-    dialogContent.append(intro);
-    const flow = document.createElement('div');
-    flow.className = 'detail-flow';
-    flow.textContent = project.flow;
-    dialogContent.append(flow);
-    project.sections.forEach(([heading, text]) => {
-      const h3 = document.createElement('h3'); h3.textContent = heading;
-      const p = document.createElement('p'); p.textContent = text;
-      dialogContent.append(h3, p);
-    });
-    const downloads = document.createElement('div');
-    downloads.className = 'download-row';
-    const link = document.createElement('a');
-    link.className = 'primary'; link.href = project.source; link.download = project.source;
-    link.textContent = '下载项目源码 ↓';
-    const size = document.createElement('span'); size.textContent = `ZIP · ${project.size} · 内含项目说明`;
-    downloads.append(link, size);
-    dialogContent.append(downloads);
-    const note = document.createElement('p'); note.className = 'disclaimer'; note.textContent = project.note;
-    dialogContent.append(note);
-    dialog.showModal();
-    document.documentElement.style.overflow = 'hidden';
-    dialog.scrollTop = 0;
+function textElement(tag,text,className) {
+  const node=document.createElement(tag);node.textContent=text;
+  if(className)node.className=className;
+  return node;
+}
+
+function sourceLink(project) {
+  const link=document.createElement('a');
+  link.className='primary';link.href=project.source;link.download=project.source;
+  link.textContent='下载项目源码 ↓';return link;
+}
+
+function renderProjectTab(tab) {
+  if(disposeLab){disposeLab();disposeLab=null;}
+  const panel=document.getElementById('project-panel');
+  panel.replaceChildren();
+  panel.setAttribute('aria-labelledby','project-tab-'+tab);
+  document.querySelectorAll('[data-project-tab]').forEach(button=>{
+    const selected=button.dataset.projectTab===tab;
+    button.setAttribute('aria-selected',String(selected));button.tabIndex=selected?0:-1;
   });
-});
-
-document.querySelector('.dialog-close').addEventListener('click', () => dialog.close());
-dialog.addEventListener('click', event => {
-  const box = dialog.getBoundingClientRect();
-  if (event.target === dialog && (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom)) dialog.close();
-});
-dialog.addEventListener('close', () => {
-  document.documentElement.style.overflow = '';
-  previousFocus?.focus({ preventScroll: true });
-});
-
-document.querySelectorAll('[data-filter]').forEach(button => button.addEventListener('click', () => {
-  document.querySelectorAll('[data-filter]').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
-  let visible = 0;
-  document.querySelectorAll('[data-category]').forEach(card => {
-    card.hidden = button.dataset.filter !== 'all' && card.dataset.category !== button.dataset.filter;
-    if (!card.hidden) visible++;
-  });
-  document.querySelector('.filter-status').textContent = `SHOWING ${String(visible).padStart(2, '0')} / 04`;
-}));
-
-const matrix = document.getElementById('matrix');
-for (let y = 0; y < 8; y++) {
-  for (let x = 0; x < 32; x++) {
-    const pixel = document.createElement('span');
-    pixel.className = 'pixel' + ((y > 5 - Math.sin(x / 4) * 2 && y < 7) || (x > 4 && x < 8 && y > 1 && y < 6) ? ' on' : '');
-    matrix.append(pixel);
+  const project=projects[currentProject];
+  if(tab==='lab') {
+    const mount=document.createElement('div');mount.className='project-lab';panel.append(mount);
+    const mounts={balance:window.LikeBalanceLab.mount,smartcar:window.LikeProjectLabs.mountCar,matrix:window.LikeProjectLabs.mountMatrix,workflow:window.LikeProjectLabs.mountWorkflow};
+    disposeLab=mounts[currentProject](mount);
+  } else if(tab==='notes') {
+    const notes=document.createElement('div');notes.className='project-notes';
+    notes.append(textElement('div',project.flow,'detail-flow'));
+    project.sections.forEach(([heading,text])=>notes.append(textElement('h3',heading),textElement('p',text)));
+    notes.append(textElement('p',project.note,'disclaimer'));panel.append(notes);
+  } else {
+    const source=document.createElement('div');source.className='project-source-panel';
+    source.append(textElement('h3','从这里，继续读代码。'),textElement('p','下载包内包含独立说明与代码入口导航。网页交互演示与原始项目源码分别整理，方便理解原理与继续动手。'));
+    const box=document.createElement('div');box.className='source-filebox';
+    box.append(textElement('strong',project.source),textElement('p','ZIP · '+project.size+' · 内含项目 README'));
+    source.append(box,sourceLink(project),textElement('p',project.note,'disclaimer'));panel.append(source);
   }
 }
 
-const ballPosition = document.getElementById('ball-position');
-ballPosition.addEventListener('input', () => {
-  const value = Number(ballPosition.value);
-  const ball = document.querySelector('.hero-ball');
-  ball.setAttribute('cx', String(267 + value));
-  ball.setAttribute('cy', String(140 - value * 0.3));
-  document.getElementById('ball-output').textContent = value === 0 ? 'CENTER' : value > 0 ? 'RIGHT' : 'LEFT';
+function openProject(slug,trigger) {
+  if(!projects[slug])return;
+  heroLab.pause();
+  if(disposeLab){disposeLab();disposeLab=null;}
+  previousFocus=trigger;currentProject=slug;
+  const project=projects[slug];
+  document.getElementById('dialog-index').textContent=project.index+' / PROJECT LAB';
+  dialogContent.replaceChildren();
+  const heading=document.createElement('div');heading.className='project-dialog-heading';
+  const title=textElement('h2',project.title);title.id='dialog-title';
+  const tags=document.createElement('div');tags.className='detail-tags';
+  project.tags.forEach(text=>tags.append(textElement('span',text)));
+  heading.append(title,tags);dialogContent.append(heading,textElement('p',project.intro,'project-summary'));
+  const tabs=document.createElement('div');tabs.className='project-tabs';tabs.setAttribute('role','tablist');tabs.setAttribute('aria-label','项目内容');
+  [['lab','交互演示'],['notes','项目解析'],['source','源码与说明']].forEach(([key,name])=>{
+    const button=textElement('button',name);button.type='button';button.id='project-tab-'+key;
+    button.dataset.projectTab=key;button.setAttribute('role','tab');button.setAttribute('aria-controls','project-panel');
+    button.addEventListener('click',()=>renderProjectTab(key));
+    button.addEventListener('keydown',event=>{
+      if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
+      event.preventDefault();
+      const keys=['lab','notes','source'],i=keys.indexOf(key);
+      const next=event.key==='Home'?0:event.key==='End'?2:(i+(event.key==='ArrowRight'?1:2))%3;
+      renderProjectTab(keys[next]);document.getElementById('project-tab-'+keys[next]).focus();
+    });tabs.append(button);
+  });
+  const panel=document.createElement('div');panel.id='project-panel';panel.className='project-tab-panel';panel.setAttribute('role','tabpanel');panel.tabIndex=0;
+  dialogContent.append(tabs,panel);dialog.showModal();document.documentElement.style.overflow='hidden';renderProjectTab('lab');dialog.scrollTop=0;
+}
+
+document.addEventListener('click',event=>{
+  const trigger=event.target.closest('[data-project]');
+  if(trigger){event.preventDefault();openProject(trigger.dataset.project,trigger);}
 });
+document.querySelector('.dialog-close').addEventListener('click',()=>dialog.close());
+dialog.addEventListener('click',event=>{
+  const box=dialog.getBoundingClientRect();
+  if(event.target===dialog&&(event.clientX<box.left||event.clientX>box.right||event.clientY<box.top||event.clientY>box.bottom))dialog.close();
+});
+dialog.addEventListener('close',()=>{
+  if(dialog.open)return;
+  if(disposeLab){disposeLab();disposeLab=null;}
+  document.documentElement.style.overflow='';previousFocus?.focus({preventScroll:true});
+});
+
+document.querySelectorAll('[data-filter]').forEach(button=>button.addEventListener('click',()=>{
+  document.querySelectorAll('[data-filter]').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));
+  let visible=0;
+  document.querySelectorAll('[data-category]').forEach(card=>{card.hidden=button.dataset.filter!=='all'&&card.dataset.category!==button.dataset.filter;if(!card.hidden)visible++;});
+  document.querySelector('.filter-status').textContent=`SHOWING ${String(visible).padStart(2,'0')} / 04`;
+}));
+
+const matrix=document.getElementById('matrix');
+const occupied=new Set(window.LikeLabModels.createBeads().map(p=>p.x+','+p.y));
+for(let y=0;y<8;y++)for(let x=0;x<32;x++){
+  const pixel=document.createElement('span');pixel.className='pixel'+(occupied.has(x+','+y)?' on':'');matrix.append(pixel);
+}
