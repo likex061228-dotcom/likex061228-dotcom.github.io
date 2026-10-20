@@ -95,8 +95,16 @@ function renderProjectTab(tab) {
   const project=projects[currentProject];
   if(tab==='lab') {
     const mount=document.createElement('div');mount.className='project-lab';panel.append(mount);
-    const mounts={balance:window.LikeBalanceLab.mount,smartcar:window.LikeProjectLabs.mountCar,matrix:window.LikeProjectLabs.mountMatrix,workflow:window.LikeProjectLabs.mountWorkflow};
-    disposeLab=mounts[currentProject](mount);
+    if(currentProject==='workflow')disposeLab=window.LikeProjectLabs.mountWorkflow(mount);
+    else {
+      const frame=document.createElement('iframe');
+      const standalone=document.createElement('a');standalone.href='simulator.html?project='+currentProject;standalone.target='_blank';standalone.rel='noopener noreferrer';standalone.className='simulator-open-link';standalone.textContent='在独立仿真实验室中打开 ↗';mount.append(standalone);
+      frame.className='simulator-embed';frame.title=project.title+' · 项目仿真平台';
+      frame.src='simulator.html?embed=1&project='+currentProject;
+      const sizing=event=>{if(event.origin===location.origin&&event.source===frame.contentWindow&&event.data?.type==='like-simulator-height')frame.style.height=Math.max(500,Math.min(2600,Number(event.data.height)||700))+'px';};
+      window.addEventListener('message',sizing);mount.append(frame);
+      disposeLab=()=>{window.removeEventListener('message',sizing);frame.src='about:blank';frame.remove();};
+    }
   } else if(tab==='notes') {
     const notes=document.createElement('div');notes.className='project-notes';
     notes.append(textElement('div',project.flow,'detail-flow'));
