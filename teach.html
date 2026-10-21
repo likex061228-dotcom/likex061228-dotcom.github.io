@@ -1,1 +1,22 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#111c21"><meta name="color-scheme" content="dark"><meta name="description" content="Like_x 嵌入式教学台：用真实寄存器规则和定时器公式解释 GPIO、上下拉、消抖、中断优先级与 PWM 的因果关系。"><title>嵌入式教学台 · Like_x</title><link rel="icon" href="favicon.svg"><link rel="stylesheet" href="project-studio.css?v=20261021-7"><link rel="stylesheet" href="teach.css?v=20261021-8"><script type="module" src="teach-app.js?v=20261021-8"></script></head><body><a class="skip" href="#app">跳到教学内容</a><header class="studio-nav"><a class="studio-logo" href="index.html">Like_x<span>.</span></a><span class="nav-separator"></span><span>嵌入式教学台</span><nav><a href="index.html#projects">作品集 ↗</a><a href="studio.html">工程工作台 ↗</a></nav></header><main class="teach-wrap"><section class="teach-hero"><div class="eyebrow">TEACHING BENCH / STM32 · HTTP 静态页 · 无固件执行</div><h1>把“为什么”看见：<br>从引脚配置到寄存器与波形。</h1><p>写给刚接触 STM32 的同学：左边点一个引脚，就能看到 CubeMX 里选的东西、生成的 HAL 代码、寄存器里哪几位变了，以及引脚最终是高还是低。后面还有按键抖动、PWM 调光和一份自检题库。</p><p class="quiet">这个页面用 STM32F103RCT6 / F103C8T6 / F407VET6 的真实寄存器规则和定时器公式计算，但<b>不执行固件</b>，也不仿真模拟精度；实际行为以数据手册、参考手册和你板子的原理图为准。</p></section><div id="app"><noscript>这个页面需要 JavaScript 才能显示交互内容。</noscript></div><footer class="studio-footer"><span>Like_x · BUILD / OBSERVE / ITERATE</span><a href="index.html">回到作品集 ↗</a><a href="studio.html">工程工作台 ↗</a></footer></main></body></html>
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#111c21"><meta name="color-scheme" content="dark"><meta name="description" content="Like_x 嵌入式教学台：按章节讲解 GPIO、按键消抖、外部中断、NVIC 优先级、定时器与 PWM，配可交互的寄存器与波形视图，以及常见问题排查。"><title>嵌入式教学台 · Like_x</title><link rel="icon" href="favicon.svg"><link rel="stylesheet" href="project-studio.css?v=20261021-7"><link rel="stylesheet" href="teach.css?v=20261021-9"><script type="module" src="teach-app.js?v=20261021-9"></script></head><body class="docs-body">
+<a class="skip" href="#doc">跳到正文</a>
+<header class="docs-top">
+  <button type="button" class="side-toggle" id="side-toggle" aria-label="打开章节目录">☰</button>
+  <a class="docs-brand" href="index.html">Like_x<span>.</span></a>
+  <span class="docs-badge">嵌入式教学台</span>
+  <nav class="docs-links"><a href="index.html">作品集</a><a href="studio.html">工程工作台</a><a href="workbench.html">MuJoCo 工作区</a></nav>
+  <span class="docs-progress" id="doc-progress">已读 0/0</span>
+</header>
+<div class="docs-shell">
+  <aside class="docs-side" id="docs-side" aria-label="章节目录"></aside>
+  <main class="docs-main">
+    <div class="doc-crumbs" id="doc-crumbs"></div>
+    <article id="doc"></article>
+    <nav class="doc-pager" id="doc-pager"></nav>
+    <footer class="docs-foot">
+      <strong>能力边界：</strong>本页用 STM32F103RCT6 / F103C8T6 / F407VET6 的寄存器规则与定时器公式做教学计算，<b>不执行固件</b>、不仿真模拟精度、不代替上板调试。板上接线取自正点原子 NANO STM32F1 V2.0《IO 引脚分配表》与 Blue Pill 原理图；其他板子以你的原理图为准。
+    </footer>
+  </main>
+  <aside class="docs-toc" id="docs-toc" aria-label="本章目录"></aside>
+</div>
+</body></html>
