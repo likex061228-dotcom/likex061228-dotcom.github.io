@@ -1,6 +1,6 @@
 # Like_x · 个人工程作品集
 
-记录电子制作、控制实验与小工具的个人项目档案。采用深色仪器台视觉风格，纯 HTML / CSS / JavaScript，无需构建，无第三方字体、统计或追踪脚本。作品集提供轻量功能展示，独立实验室提供调参和场景编辑；演示不连接实物，也不运行原固件。
+记录电子制作、控制实验与小工具的个人项目档案。采用深色仪器台视觉风格，成品可直接静态托管；物理工作台源码复现需构建，无第三方字体、统计或追踪脚本。作品集提供轻量功能展示，独立实验室提供调参和场景编辑；演示不连接实物，也不运行原固件。
 
 网站：https://likex061228-dotcom.github.io/
 
@@ -30,12 +30,16 @@
 ## 隐私与许可
 公开作者为 Like_x；不包含个人联系方式、学校、学号或本机路径。页面不收集访问者资料；托管平台自身可能有正常的服务日志。第三方源码及模板适用其原有许可；未为全部内容统一指定开源许可。
 
-## 嵌入式项目仿真实验室
+## 已有项目的行为演示
 
-[进入平台](simulator.html)。支持车载滚球（静止、直行加减速、整圈循迹）、传感器驱动的小车行为、具有惯性与弹跳的LED点阵。提供运行/暂停/单步、时间倍率、参数调节、信号曲线、局部场景编辑及本机JSON导入导出。
+[查看原理演示](simulator.html)。支持车载滚球（静止、直行加减速、整圈循迹）、传感器驱动的小车行为、具有惯性与弹跳的LED点阵。提供运行/暂停/单步、时间倍率、参数调节、信号曲线、局部场景编辑及本机JSON导入导出。
 
 这是可编辑的项目级行为模型，不执行C代码或固件，不模拟电路电气特性。默认模型参数不是实测辨识结果。新增文件：sim-engine.js（物理与行为模型）、simulator.js（交互与绘图）、simulator.css 和 simulator.html。保存场景只写入浏览器本地存储，导出只包含允许的参数及场景对象。
 
 
 ## 2026-10-21 refinement
 Portfolio now uses curated feature demonstrations; parameters, scene editing and signals belong to the standalone laboratory. Exact major removed. See model-notes.html for source-to-model coverage, limitations and design references. H course uses two 1.5 m straights and two R0.5 m semicircles, with task presets 2–6. Matrix initialization and light tap counts vary. No real hardware certification or firmware execution is claimed.
+
+
+## 3D mechanical and control workbench
+The primary laboratory entrance is workbench.html. Official MuJoCo3.16.0 WASM computes rigid-body physics, contacts, joints, motors and sensors; Three.js0.186.1 only renders engine transforms. Native MJCF/controller editing and local supported-template requirement parsing are distinct capabilities. No remote LLM, MCU or electrical simulation is claimed. See physics-guide.html for numerical benchmarks, limitations and licenses. The former simulator.html remains a clearly labeled behavior exhibit for existing portfolio projects. Source and tests: physics-lab-source.zip.

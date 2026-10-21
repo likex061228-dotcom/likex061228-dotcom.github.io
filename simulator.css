@@ -15,3 +15,5 @@
 .parameter-group{font-size:10px;letter-spacing:1px;font-weight:500;color:#d7c3a0;margin:22px 0 10px;border-bottom:1px solid #3a5047;padding-bottom:10px;grid-column:1 / -1}.parameter-group:first-child{margin-top:13px}
 
 .signal-actions{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:7px}.signal-actions button{font-size:10px}.signal-actions [hidden]{display:none!important}@media(max-width:520px){.signal-actions{justify-content:flex-start}.signal-actions button{font-size:10px}}
+
+.legacy-banner{display:block;background:#294536;color:#dbe7c9;padding:12px 20px;font-size:12px;line-height:1.8}.showcase .legacy-banner,.embed .legacy-banner{display:none!important}

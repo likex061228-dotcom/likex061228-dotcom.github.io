@@ -101,7 +101,7 @@ function renderProjectTab(tab) {
     if(currentProject==='workflow')disposeLab=window.LikeProjectLabs.mountWorkflow(mount);
     else {
       const frame=document.createElement('iframe');
-      const standalone=document.createElement('a');standalone.href='simulator.html?project='+currentProject;standalone.target='_blank';standalone.rel='noopener noreferrer';standalone.className='simulator-open-link';standalone.textContent='调整参数与场景，前往仿真实验室 ↗';mount.append(standalone);
+      const standalone=document.createElement('a');standalone.href='workbench.html';standalone.target='_blank';standalone.rel='noopener noreferrer';standalone.className='simulator-open-link';standalone.textContent='进入3D实验室，建立自己的机械模型 ↗';mount.append(standalone);
       frame.className='simulator-embed';frame.title=project.title+' · 功能展示';
       frame.src='simulator.html?showcase=1&project='+currentProject;
       const sizing=event=>{if(event.origin===location.origin&&event.source===frame.contentWindow&&event.data?.type==='like-simulator-height')frame.style.height=Math.max(500,Math.min(2600,Number(event.data.height)||700))+'px';};
