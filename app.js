@@ -6,7 +6,7 @@ const projects = {
     tags: ['省级三等奖', 'STM32F407', 'MaixCAM', 'PD 控制'],
     intro: '河北省电子设计竞赛 H 题项目。在小车运动与循迹的同时，通过视觉位置反馈调节水管一端高度，让球的位置控制与底盘运动协同工作。',
     sections: [
-      ['问题与目标', '将视觉检测、平衡平台和小车循迹整合为一个系统。单个模块能够工作之后，还需要处理通信、控制节拍、任务切换与停车收尾。'],
+      ['题目要求与目标', 'H题包含静止+5cm至−5cm往返、A→B行驶平衡、整圈中心与指定位置控制。赛道为两段1.5m直线与两个R0.5m半圆，绝非椭圆。将视觉检测、平衡平台和小车循迹整合为一个系统。单个模块能够工作之后，还需要处理通信、控制节拍、任务切换与停车收尾。'],
       ['系统如何连接', 'MaixCAM 输出球的位置；STM32F407 接收坐标并执行 PD 控制；水管左端固定铰接，右端由步进电机通过曲柄连杆升降；摄像头位于水管上方，光电循迹传感器位于底盘下方。红外巡线、直流电机与姿态传感器共同参与底盘控制。'],
       ['实现中的重点', '将视觉串口数据、控制计算和执行机构连成闭环，组织不同任务下的菜单与状态切换，并处理停止后的平台复位。具体控制逻辑可从 main.c、pid.c 和视觉脚本阅读。'],
       ['项目收获', '一次从器件、算法走向系统联调的实践。比起只看某个模块，更需要关注各部分连接之后的反馈和相互影响。']
@@ -35,7 +35,7 @@ const projects = {
     intro: '用姿态传感器读取动作，让光点在点阵里滚动、堆积和弹跳。从简单的显示器件出发，尝试更直接、更有趣的交互。',
     sections: [
       ['从动作到画面', 'STM32F103C8T6 读取 MPU6050 数据，再通过四片级联 MAX7219 驱动 8×32 LED 点阵。将倾斜与运动转换为光点的移动和显示刷新。'],
-      ['主要效果', '普通珠盘模式包含64颗光点，支持倾斜滚动、堆积、摇动弹跳与轻弹效果。倒扣保持并及时翻回可切换固定横向沙漏模式。'],
+      ['主要效果', '对应积分赛C题的8×32珠盘，32列每列随机初始化2颗，共64颗光点，支持四边与四角倾斜滚动、堆积、摇动弹跳与随机数量轻弹效果。倒扣保持并及时翻回可切换固定横向沙漏模式。'],
       ['代码结构', 'motion.c 与 mpu6050.c 负责运动采集，bead_engine.c 处理光点，hourglass.c 处理沙漏模式，max7219.c 负责显示输出。'],
       ['一个小小的说明', '原文件夹沿用 chang_OLED 名称，但当前主工程使用的是 MAX7219 LED 点阵。沙漏是视觉互动效果，并非校准过的计时器。']
     ],
@@ -64,7 +64,10 @@ const dialogContent = document.getElementById('dialog-content');
 let previousFocus = null;
 let disposeLab = null;
 let currentProject = null;
-const heroLab = window.LikeBalanceLab.mount(document.getElementById('hero-lab'), {compact:true});
+const heroFrame=document.createElement('iframe');heroFrame.className='hero-demo';heroFrame.title='车载平衡滚球 · 功能展示';heroFrame.src='simulator.html?showcase=1&hero=1&project=balance';document.getElementById('hero-lab').append(heroFrame);
+window.addEventListener('message',event=>{if(event.origin===location.origin&&event.source===heroFrame.contentWindow&&event.data?.type==='like-simulator-height')heroFrame.style.height=Math.max(300,Math.min(900,Number(event.data.height)||420))+'px';});
+const heroLab={pause(){heroFrame.contentWindow?.postMessage({type:'like-demo-pause'},location.origin);}};
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches)new IntersectionObserver(entries=>{const visible=entries[0]?.isIntersecting&&!dialog.open;heroFrame.contentWindow?.postMessage({type:visible?'like-demo-resume':'like-demo-pause'},location.origin);},{threshold:.1}).observe(heroFrame);
 const previewHost = document.createElement('div');
 const disposePreview = window.LikeBalanceLab.mount(previewHost, {compact:true});
 const previewSvg = previewHost.querySelector('.balance-svg').cloneNode(true);
@@ -98,9 +101,9 @@ function renderProjectTab(tab) {
     if(currentProject==='workflow')disposeLab=window.LikeProjectLabs.mountWorkflow(mount);
     else {
       const frame=document.createElement('iframe');
-      const standalone=document.createElement('a');standalone.href='simulator.html?project='+currentProject;standalone.target='_blank';standalone.rel='noopener noreferrer';standalone.className='simulator-open-link';standalone.textContent='在独立仿真实验室中打开 ↗';mount.append(standalone);
-      frame.className='simulator-embed';frame.title=project.title+' · 项目仿真平台';
-      frame.src='simulator.html?embed=1&project='+currentProject;
+      const standalone=document.createElement('a');standalone.href='simulator.html?project='+currentProject;standalone.target='_blank';standalone.rel='noopener noreferrer';standalone.className='simulator-open-link';standalone.textContent='调整参数与场景，前往仿真实验室 ↗';mount.append(standalone);
+      frame.className='simulator-embed';frame.title=project.title+' · 功能展示';
+      frame.src='simulator.html?showcase=1&project='+currentProject;
       const sizing=event=>{if(event.origin===location.origin&&event.source===frame.contentWindow&&event.data?.type==='like-simulator-height')frame.style.height=Math.max(500,Math.min(2600,Number(event.data.height)||700))+'px';};
       window.addEventListener('message',sizing);mount.append(frame);
       disposeLab=()=>{window.removeEventListener('message',sizing);frame.src='about:blank';frame.remove();};
@@ -109,7 +112,7 @@ function renderProjectTab(tab) {
     const notes=document.createElement('div');notes.className='project-notes';
     notes.append(textElement('div',project.flow,'detail-flow'));
     project.sections.forEach(([heading,text])=>notes.append(textElement('h3',heading),textElement('p',text)));
-    notes.append(textElement('p',project.note,'disclaimer'));panel.append(notes);
+    const evidence=document.createElement('a');evidence.href='model-notes.html#'+currentProject;evidence.className='evidence-link';evidence.textContent='查看赛题、代码与网页模型的对应关系 ↗';notes.append(evidence);notes.append(textElement('p',project.note,'disclaimer'));panel.append(notes);
   } else {
     const source=document.createElement('div');source.className='project-source-panel';
     source.append(textElement('h3','从这里，继续读代码。'),textElement('p','下载包内包含独立说明与代码入口导航。网页交互演示与原始项目源码分别整理，方便理解原理与继续动手。'));
@@ -125,7 +128,7 @@ function openProject(slug,trigger) {
   if(disposeLab){disposeLab();disposeLab=null;}
   previousFocus=trigger;currentProject=slug;
   const project=projects[slug];
-  document.getElementById('dialog-index').textContent=project.index+' / PROJECT LAB';
+  document.getElementById('dialog-index').textContent=project.index+' / PROJECT STORY';
   dialogContent.replaceChildren();
   const heading=document.createElement('div');heading.className='project-dialog-heading';
   const title=textElement('h2',project.title);title.id='dialog-title';
@@ -133,7 +136,7 @@ function openProject(slug,trigger) {
   project.tags.forEach(text=>tags.append(textElement('span',text)));
   heading.append(title,tags);dialogContent.append(heading,textElement('p',project.intro,'project-summary'));
   const tabs=document.createElement('div');tabs.className='project-tabs';tabs.setAttribute('role','tablist');tabs.setAttribute('aria-label','项目内容');
-  [['lab','交互演示'],['notes','项目解析'],['source','源码与说明']].forEach(([key,name])=>{
+  [['lab','功能展示'],['notes','项目解析'],['source','源码与说明']].forEach(([key,name])=>{
     const button=textElement('button',name);button.type='button';button.id='project-tab-'+key;
     button.dataset.projectTab=key;button.setAttribute('role','tab');button.setAttribute('aria-controls','project-panel');
     button.addEventListener('click',()=>renderProjectTab(key));
@@ -161,7 +164,7 @@ dialog.addEventListener('click',event=>{
 dialog.addEventListener('close',()=>{
   if(dialog.open)return;
   if(disposeLab){disposeLab();disposeLab=null;}
-  document.documentElement.style.overflow='';previousFocus?.focus({preventScroll:true});
+  heroFrame.contentWindow?.postMessage({type:'like-demo-resume'},location.origin);document.documentElement.style.overflow='';previousFocus?.focus({preventScroll:true});
 });
 
 document.querySelectorAll('[data-filter]').forEach(button=>button.addEventListener('click',()=>{
