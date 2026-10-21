@@ -1,0 +1,127 @@
+/* 嵌入式教学台：在 project-studio.css 的深色仪器台基础上补齐组件样式。 */
+.teach-wrap{max-width:1456px;margin:auto;padding:0 28px 40px}
+.teach-hero{padding:44px 0 26px;border-bottom:1px solid var(--line)}
+.teach-hero h1{font-size:clamp(26px,3.4vw,42px);font-weight:580;letter-spacing:-1px;line-height:1.5;margin:12px 0 18px}
+.teach-hero p{font-size:13px;line-height:2;color:var(--muted);max-width:820px;margin:0 0 10px}
+.teach-hero b{color:var(--mint);font-weight:600}
+.teach-card{border:1px solid var(--line);border-radius:7px;background:#152529;margin:22px 0;padding:22px 24px}
+.card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;margin-bottom:18px}
+.card-head h2{font-size:22px;font-weight:520;margin:8px 0 0}
+.card-head .quiet{max-width:560px;font-size:11px;line-height:1.9;color:var(--muted);margin:0}
+.teach-chipbar{margin-top:22px}
+.teach-chips{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.teach-chips button{text-align:left;background:#17282d;border:1px solid var(--line);border-radius:6px;padding:14px 16px;color:var(--text);display:flex;flex-direction:column;gap:6px}
+.teach-chips button:hover{border-color:#52715d}
+.teach-chips button.on{border-color:var(--mint);background:#1d3a33}
+.teach-chips strong{font-size:14px;font-weight:600}
+.teach-chips small{font-size:10px;color:var(--muted);font-family:Consolas,monospace}
+.teach-chipbar .quiet{font-size:11px;line-height:1.9;color:var(--muted);margin:12px 0 0}
+
+/* 引脚墙 */
+.pinwall{display:flex;flex-direction:column;gap:8px}
+.pin-row{display:flex;align-items:center;gap:12px}
+.pin-port{width:28px;font:11px/1 Consolas,monospace;color:#8ba99b}
+.pin-cells{display:flex;flex-wrap:wrap;gap:6px}
+.pin{width:38px;height:34px;border-radius:4px;border:1px solid #2c4644;background:#16272b;color:#b9c8bf;font:11px/1 Consolas,monospace;position:relative}
+.pin:hover{border-color:#749e83}
+.pin.on{border-color:var(--mint);background:#20392f;color:#eaf3e9;box-shadow:0 0 0 1px var(--mint) inset}
+.pin.warn{border-style:dashed;border-color:#6b5a3f}
+.pin i{position:absolute;right:4px;top:4px;width:4px;height:4px;border-radius:50%;background:var(--gold)}
+.pin.on i{background:var(--mint)}
+
+/* 配置区 */
+.cfg-row{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;padding:14px;background:#122125;border:1px solid var(--line);border-radius:5px}
+.cfg-row label{display:flex;flex-direction:column;gap:6px;font-size:10px;color:var(--muted);letter-spacing:.4px}
+.cfg-row select{min-width:210px;background:#0e1a1e;color:var(--text);border:1px solid #36504b;border-radius:3px;padding:8px 10px;font-size:11px}
+.level-toggle{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--muted)}
+.level-toggle.off{opacity:.45}
+.level-toggle button{min-width:38px;padding:8px 10px;border:1px solid #36504b;background:#0e1a1e;color:#b9c8bf;border-radius:3px;font-size:11px}
+.level-toggle button.on{background:var(--mint);color:#18332c;border-color:var(--mint);font-weight:600}
+.led-demo{display:flex;align-items:center;gap:12px;margin-left:auto}
+.led-demo small{display:block;font-size:9px;color:#78958b;letter-spacing:1px}
+.led-demo strong{font-size:11px;font-weight:500;color:#cfe1c4}
+.led{width:22px;height:22px;border-radius:50%;background:#2b3a33;border:1px solid #3d5348;box-shadow:none;transition:all .25s}
+.led.lit{background:#ffe7a8;border-color:#ffd879;box-shadow:0 0 14px 4px rgba(255,216,121,.55)}
+.led.big{width:44px;height:44px}
+.warn-list{margin:12px 0 0;padding:10px 14px 10px 30px;border-left:2px solid #b08a52;background:#2a2218;color:#e2cba4;font-size:11px;line-height:1.9;border-radius:0 4px 4px 0}
+.warn-list li+li{margin-top:4px}
+
+/* 三联视图 */
+.triple{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.1fr) minmax(0,1.2fr);gap:16px;margin-top:18px}
+.triple-col{min-width:0}
+.triple-col h3{font-size:12px;font-weight:600;color:#cfe1c4;margin:0 0 10px}
+.kv{margin:0;font-size:11px}
+.kv>div{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px dashed #2b403d}
+.kv dt{color:var(--muted)}
+.kv dd{margin:0;color:var(--text)}
+.code{margin:0;background:#0c1619;border:1px solid #26393d;border-radius:4px;padding:12px;overflow:auto;max-height:330px}
+.code code{font:11px/1.75 Consolas,monospace;color:#b6c9c1;white-space:pre}
+.code .cm{color:#6f8c84;font-style:italic}
+.reg-list{display:flex;flex-direction:column;gap:8px}
+.reg{background:#0c1619;border:1px solid #26393d;border-radius:4px;padding:10px}
+.reg-head{display:flex;justify-content:space-between;font:11px/1.5 Consolas,monospace;color:#9dbbb2}
+.reg-head b{color:var(--gold);font-weight:600}
+.reg-bits{margin:6px 0 4px;overflow:hidden}
+.reg-bits code{font:10px/1.6 Consolas,monospace;color:#5c7670;letter-spacing:.5px;word-break:break-all}
+.reg-bits b{color:var(--mint);font-weight:700}
+.reg p{margin:0;font-size:10px;color:#7e968d;line-height:1.6}
+
+/* 抖动 & PWM */
+.deb-grid,.pwm-grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(220px,.7fr);gap:16px;align-items:start}
+.deb-canvas-wrap,.pwm-canvas-wrap{border:1px solid #26393d;border-radius:4px;overflow:hidden;background:#0c171b;min-width:0}
+canvas{display:block;width:100%}
+.deb-controls,.pwm-controls{display:flex;flex-direction:column;gap:12px}
+.deb-controls label,.pwm-controls label{display:flex;flex-direction:column;gap:5px;font-size:10px;color:var(--muted)}
+.deb-controls output,.pwm-controls output{font:11px/1 Consolas,monospace;color:var(--mint);order:-1}
+input[type=range]{width:100%;accent-color:#acdfc4}
+.deb-result{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:14px}
+.deb-result>div,.pwm-readout>div{background:#122125;border:1px solid #26393d;border-radius:4px;padding:10px 12px}
+.deb-result small,.pwm-readout small{display:block;font-size:9px;color:#78958b;letter-spacing:.6px}
+.deb-result strong,.pwm-readout strong{font-size:15px;font-weight:600;display:block;margin-top:4px}
+.deb-result p{margin:4px 0 0;font-size:10px;line-height:1.7;color:#9bb0a7}
+.pwm-readout{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:14px}
+.pwm-readout span{font-size:9px;color:#78958b;font-family:Consolas,monospace}
+.pwm-led{display:flex;align-items:center;gap:12px;font-size:10px;color:var(--muted);margin-top:6px}
+.warn-inline{grid-column:1/-1;border-left:2px solid #b08a52;background:#2a2218;color:#e2cba4;font-size:11px;padding:8px 12px;border-radius:0 4px 4px 0}
+
+/* 题库 */
+.quiz-score{display:flex;align-items:center;gap:14px;font-size:11px;color:#a9c0b6;margin-bottom:16px}
+.quiz-list{display:flex;flex-direction:column;gap:14px}
+.quiz-item{border:1px solid #26393d;border-radius:5px;padding:14px 16px;background:#132125}
+.quiz-item.ok{border-color:#3f6b52}
+.quiz-item.bad{border-color:#6b4038}
+.quiz-item header{display:flex;gap:10px;align-items:baseline}
+.quiz-item .sec{font:9px/1 Consolas,monospace;color:#78958b;border:1px solid #2f4744;border-radius:3px;padding:3px 6px;flex:none}
+.quiz-item h3{font-size:13px;font-weight:500;margin:0;line-height:1.7}
+.quiz-opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}
+.quiz-opts button{text-align:left;padding:9px 11px;font-size:11px;background:#0f1c20;color:#b9c8bf;border:1px solid #2f4744;border-radius:3px;line-height:1.5}
+.quiz-opts button:hover{border-color:#749e83}
+.quiz-opts button.picked{border-color:#c9b07a}
+.quiz-opts button.right{border-color:var(--mint);background:#1c3a2e;color:#dff2e2}
+.quiz-why{margin:10px 0 0;font-size:11px;line-height:1.85;padding:8px 12px;border-radius:3px}
+.quiz-why.ok{background:#1a2f25;color:#b9dcc5}
+.quiz-why.bad{background:#2c211d;color:#e6b39e}
+
+.teach-boundary{margin:30px 0 10px;padding:16px 18px;border:1px solid #2f4744;border-radius:5px;background:#122125;font-size:11px;line-height:1.95;color:#9bb0a7}
+.teach-boundary strong{color:#cfe1c4}
+
+@media(max-width:1100px){
+  .triple{grid-template-columns:1fr}
+  .deb-grid,.pwm-grid{grid-template-columns:1fr}
+  .deb-result,.pwm-readout{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:760px){
+  .teach-wrap{padding-inline:14px}
+  .teach-hero{padding:26px 0 20px}
+  .teach-hero h1{font-size:26px}
+  .teach-card{padding:16px 14px}
+  .card-head{display:block}
+  .card-head .quiet{margin-top:8px}
+  .teach-chips{grid-template-columns:1fr}
+  .cfg-row{padding:12px}
+  .cfg-row select{min-width:0;width:100%}
+  .led-demo{margin-left:0;width:100%}
+  .quiz-opts{grid-template-columns:1fr}
+  .pin{width:32px;height:30px}
+  .deb-result,.pwm-readout{grid-template-columns:1fr}
+}
