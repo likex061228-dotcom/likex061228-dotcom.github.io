@@ -1,0 +1,10 @@
+# 本项目按字节保真：GitHub Pages 发布文件用 SHA256 核对，禁止 Git 改写换行符。
+* -text
+
+# 大二进制只记录版本，不做文本差分
+*.zip binary
+*.wasm binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.pdf binary
