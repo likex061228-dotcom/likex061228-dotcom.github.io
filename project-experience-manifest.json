@@ -1,0 +1,12 @@
+{
+  "model": "EmbeddedSim project behavior model v3; not MCU or full 3D rigid body physics",
+  "renderer": {
+    "name": "Three.js",
+    "version": "0.186.1",
+    "license": "MIT"
+  },
+  "sha256": {
+    "project-experience.js": "d089669704ac1ad50190e95a6f8513712b5b8d9c353ea45788abda2231d330c5",
+    "project-library.js": "8e0a473405504e45f1324b0b99e6ff7cdc346c36781bed65ed8e88d14ee1fe0a"
+  }
+}
