@@ -1,0 +1,177 @@
+/* C 语言第一课：纸面讲义 + 深色仪器面板。只作用于 c-first 章节与 C 组件。 */
+
+body[data-teach-page="c-first"]{
+  background:
+    radial-gradient(1200px 420px at 88% -8%, #e8efdc 0%, transparent 60%),
+    linear-gradient(#fbfaf5, #f7f6ef);
+}
+body[data-teach-page="c-first"] .docs-main{max-width:860px}
+body[data-teach-page="c-first"] .doc-head{border-bottom:0;padding-bottom:6px;margin-bottom:18px}
+body[data-teach-page="c-first"] .doc-head .eyebrow{
+  display:inline-flex;align-items:center;gap:8px;padding:5px 10px;border-radius:99px;
+  background:#e7eedd;color:#4a6a45;font:11px/1 system-ui,sans-serif;letter-spacing:.4px
+}
+body[data-teach-page="c-first"] .doc-head h1{font-size:clamp(26px,3.2vw,40px);line-height:1.35;letter-spacing:-.3px;margin:14px 0 10px;color:#22362b}
+body[data-teach-page="c-first"] .doc-kicker{font-size:14px;color:#6d8064}
+
+/* 学习目标 */
+.c-goals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:22px 0 8px}
+.c-goals>div{background:#fff;border:1px solid #d9e2ce;border-radius:10px;padding:12px 14px;box-shadow:0 1px 0 #dfe7d4}
+.c-goals small{display:block;font:10px/1.6 Consolas,monospace;letter-spacing:1.2px;color:#7d916f;margin-bottom:4px}
+.c-goals b{font-size:13px;font-weight:600;color:#2f4a31;line-height:1.7}
+
+/* 代码卡片 */
+.c-code{border-radius:10px;overflow:hidden;margin:18px 0;border:1px solid #243b41;background:#0f2028;box-shadow:0 6px 20px #1d322410}
+.c-code-bar{display:flex;align-items:center;gap:8px;padding:8px 12px;background:#152c34;border-bottom:1px solid #24404a}
+.c-code-bar i{width:9px;height:9px;border-radius:50%;background:#3d5a59;display:inline-block}
+.c-code-bar i:nth-child(1){background:#d9856f}.c-code-bar i:nth-child(2){background:#dfc06c}.c-code-bar i:nth-child(3){background:#7fb08a}
+.c-code-bar b{margin-left:6px;font:11px/1.4 Consolas,monospace;color:#9fb8ad;font-weight:500}
+.c-code-bar button{margin-left:auto;background:#1e3a42;color:#cfe3d3;border:1px solid #35565a;border-radius:6px;font:11px/1 system-ui,sans-serif;padding:6px 10px;cursor:pointer}
+.c-code-bar button:hover{background:#27484f}
+.c-code pre{margin:0;padding:16px 18px;overflow:auto}
+.c-code code{font:12.5px/1.9 Consolas,"Cascadia Code",monospace;color:#d7e6d6;background:none;border:0;white-space:pre}
+
+/* 输出 */
+.c-out{border-radius:10px;overflow:hidden;margin:-8px 0 20px;border:1px solid #c7d7b9;background:#eef4e4}
+.c-out span{display:block;padding:6px 12px;font:10px/1.4 Consolas,monospace;letter-spacing:1.4px;color:#6c8358;background:#e4eed6;border-bottom:1px solid #d2e0c2}
+.c-out pre{margin:0;padding:12px 16px;font:12.5px/1.9 Consolas,monospace;color:#2f4a2c;white-space:pre-wrap}
+
+/* 提示块增强 */
+body[data-teach-page="c-first"] .note{border-radius:10px;border-left-width:4px;padding:14px 18px;font-size:13.5px;box-shadow:0 1px 0 #e2e8d6}
+
+/* 步骤 */
+body[data-teach-page="c-first"] .steps li{margin:12px 0;padding-left:38px}
+body[data-teach-page="c-first"] .steps li::before{width:24px;height:24px;line-height:24px;background:#fff;font-weight:600}
+
+/* 小节导航 */
+.c-mini{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 22px}
+.c-mini a{font-size:11.5px;color:#4d6a45;background:#fff;border:1px solid #d9e2ce;border-radius:99px;padding:5px 11px;text-decoration:none}
+.c-mini a:hover{background:#eaf1e0;border-color:#a9c19a}
+
+/* 章节首页 */
+.c-hero{display:grid;grid-template-columns:1.25fr .75fr;gap:18px;margin:20px 0 26px;align-items:stretch}
+.c-hero-main{background:#22382c;color:#e8f0df;border-radius:14px;padding:24px 26px}
+.c-hero-main small{font:10px/1.6 Consolas,monospace;letter-spacing:2px;color:#9db894}
+.c-hero-main h2{margin:8px 0 10px;font-size:24px;line-height:1.5;color:#f2f7ea;font-weight:600}
+.c-hero-main p{margin:0;font-size:13px;line-height:1.9;color:#b8cbb3}
+.c-hero-side{display:flex;flex-direction:column;gap:10px}
+.c-hero-side a{display:block;background:#fff;border:1px solid #d9e2ce;border-radius:10px;padding:12px 14px;text-decoration:none;color:#33502f}
+.c-hero-side a:hover{border-color:#9fbb8c;background:#f4f8ec}
+.c-hero-side b{display:block;font-size:13px;margin-bottom:3px}
+.c-hero-side span{font-size:11px;color:#6d8161}
+
+/* 交互面板通用（C 组件） */
+.ctrace,.cmem,.cascii,.cbuf,.cfmt,.cquick{
+  background:#101f26;color:#c9d8ce;border:1px solid #2b444a;border-radius:12px;padding:16px 18px;margin:20px 0;
+  box-shadow:0 8px 24px #1b2f2614
+}
+.ctrace-head,.cmem-head,.cbuf-head,.cquick-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.ctrace-head b,.cmem-head b,.cbuf-head b,.cquick-head b{font-size:13px;color:#e4efdd;font-weight:600}
+.ctrace-head span,.cquick-head span{font-size:11px;color:#8fa79a}
+.cquick-head span{margin-left:auto}
+
+/* 逐行执行 */
+.ctrace-body{display:grid;grid-template-columns:1.25fr .75fr;gap:14px}
+.ctrace-code{background:#0a171c;border:1px solid #23393f;border-radius:8px;padding:8px 0;overflow:auto}
+.ctrace-line{display:flex;gap:12px;padding:4px 14px;font:12px/1.8 Consolas,monospace;color:#9fb3a8;transition:background .15s}
+.ctrace-line i{color:#4f6a63;font-style:normal;width:14px;text-align:right;flex:none}
+.ctrace-line code{background:none;border:0;padding:0;color:inherit;font:inherit;white-space:pre}
+.ctrace-line.active{background:#1d3a32;color:#eaf6e2;box-shadow:inset 3px 0 0 #8ec47f}
+.ctrace-side{display:flex;flex-direction:column;gap:10px;min-width:0}
+.ctrace-vars{width:100%;border-collapse:collapse;font-size:12px}
+.ctrace-vars th{text-align:left;color:#7f978b;font-weight:500;padding:4px 8px;border-bottom:1px solid #29424a}
+.ctrace-vars td{padding:6px 8px;border-bottom:1px solid #1d3238;color:#dcebdd;font-family:Consolas,monospace}
+.ctrace-console{background:#0a171c;border:1px solid #23393f;border-radius:8px;padding:8px 12px}
+.ctrace-console span{font:9px/1.6 Consolas,monospace;letter-spacing:1.4px;color:#7f978b}
+.ctrace-console pre{margin:2px 0 0;font:13px/1.7 Consolas,monospace;color:#f0d99a;white-space:pre-wrap;min-height:22px}
+.ctrace-note{font-size:12px;color:#a7c0b2;margin:12px 0 0;min-height:20px}
+.ctrace-controls{display:flex;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap}
+.ctrace-controls button,.cbuf-controls button{background:#1d3a42;color:#d6e6da;border:1px solid #365558;border-radius:7px;font:12px/1 system-ui,sans-serif;padding:8px 12px;cursor:pointer}
+.ctrace-controls button:hover,.cbuf-controls button:hover{background:#27505a}
+.ctrace-progress,.cbuf-progress{margin-left:auto;font:11px/1 Consolas,monospace;color:#8fae9c}
+
+/* 内存 */
+.cmem-head label{margin-left:auto;font-size:11px;color:#93ab9c;display:flex;align-items:center;gap:6px}
+.cmem-head input{width:110px;background:#0a171c;border:1px solid #365558;border-radius:6px;color:#e7f2e2;padding:6px 8px;font:12px Consolas,monospace}
+.cmem-bytes{display:flex;gap:10px;flex-wrap:wrap}
+.cmem-byte{background:#0a171c;border:1px solid #23393f;border-radius:8px;padding:8px 10px;display:flex;gap:3px;flex-wrap:wrap;max-width:170px}
+.cmem-byte small{flex-basis:100%;font:9px/1.6 Consolas,monospace;color:#6f8a80;margin-bottom:3px}
+.cmem-byte i{font:12px/1 Consolas,monospace;font-style:normal;color:#a9c8b7;padding:3px 1px}
+.cmem-byte i.sign{color:#f0c978;font-weight:700}
+.cmem-readout{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:14px}
+.cmem-readout>div{background:#0a171c;border:1px solid #23393f;border-radius:8px;padding:8px 10px}
+.cmem-readout small{display:block;font-size:9px;color:#7f978b;letter-spacing:.6px}
+.cmem-readout b{font-size:13px;color:#eaf5e4;font-family:Consolas,monospace}
+.cmem-note{font-size:11.5px;color:#93ab9c;line-height:1.8;margin:12px 0 0}
+
+/* ASCII */
+.cascii-row{display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap}
+.cascii-row label{display:flex;flex-direction:column;gap:5px;font-size:11px;color:#93ab9c}
+.cascii-row input{width:90px;background:#0a171c;border:1px solid #365558;border-radius:6px;color:#e7f2e2;padding:8px 10px;font:16px Consolas,monospace;text-align:center}
+.cascii-row button{background:#1d3a42;color:#d6e6da;border:1px solid #365558;border-radius:7px;font:12px/1 system-ui,sans-serif;padding:9px 12px;cursor:pointer}
+.cascii-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:14px 0}
+.cascii-cards>div{background:#0a171c;border:1px solid #23393f;border-radius:8px;padding:8px 10px}
+.cascii-cards small{display:block;font-size:9px;color:#7f978b}
+.cascii-cards b{font:16px/1.5 Consolas,monospace;color:#f0d99a}
+.cascii-bar{position:relative;height:34px;margin:6px 0 4px;background:#0a171c;border:1px solid #23393f;border-radius:8px;overflow:hidden}
+.cascii-scale{position:absolute;inset:0;background:linear-gradient(90deg,#27403a,#2f5547,#27403a)}
+.cascii-bar i{position:absolute;top:0;bottom:0;width:2px;background:#f0c978;box-shadow:0 0 8px #f0c978;transition:left .18s}
+.cascii-bar .tick{position:absolute;bottom:2px;transform:translateX(-50%);font:9px/1 Consolas,monospace;color:#c8dccb}
+.cascii-note{font-size:11.5px;color:#9fb6a7;margin:8px 0 0}
+
+/* scanf 缓冲区 */
+.cbuf-toggle{margin-left:auto;font-size:11px;color:#a3b9ab;display:flex;align-items:center;gap:6px}
+.cbuf-code{background:#0a171c;border:1px solid #23393f;border-radius:8px;padding:6px 0;margin-bottom:12px}
+.cbuf-line{display:flex;gap:10px;padding:4px 12px;font:12px/1.7 Consolas,monospace;color:#9fb3a8}
+.cbuf-line i{color:#4f6a63;font-style:normal;width:12px;text-align:right}
+.cbuf-line code{background:none;border:0;padding:0;color:inherit;font:inherit}
+.cbuf-line.active{background:#1d3a32;color:#eaf6e2;box-shadow:inset 3px 0 0 #8ec47f}
+.cbuf-playfield{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}
+.cbuf-queue{background:#0a171c;border:1px solid #23393f;border-radius:8px;padding:10px 12px;min-height:86px}
+.cbuf-queue small{display:block;font-size:9px;color:#7f978b;letter-spacing:.8px;margin-bottom:8px}
+.cbuf-cells{display:flex;gap:5px;flex-wrap:wrap}
+.cbuf-cell{min-width:26px;text-align:center;padding:5px 6px;border-radius:6px;background:#1c333a;color:#dcebdd;font:12px Consolas,monospace;border:1px solid #2f4d54}
+.cbuf-cell.front{border-color:#f0c978;color:#f0d99a;box-shadow:0 0 0 1px #f0c97833}
+.cbuf-empty{color:#6f8a80;font-size:12px}
+.cbuf-vars{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.cbuf-vars>div{background:#0a171c;border:1px solid #23393f;border-radius:8px;padding:8px 10px}
+.cbuf-vars small{display:block;font-size:9px;color:#7f978b}
+.cbuf-vars b{font:13px/1.5 Consolas,monospace;color:#eaf5e4}
+.cbuf-note{font-size:11.5px;color:#a7c0b2;margin:12px 0 0}
+.cbuf-controls{display:flex;align-items:center;gap:8px;margin-top:12px}
+
+/* 格式实验 */
+.cfmt-inputs{display:grid;grid-template-columns:1.1fr 1fr auto;gap:12px;align-items:end}
+.cfmt-inputs label{display:flex;flex-direction:column;gap:5px;font-size:10px;color:#93ab9c}
+.cfmt-inputs input[type=text]{background:#0a171c;border:1px solid #365558;border-radius:6px;color:#e7f2e2;font:13px Consolas,monospace;padding:9px 10px}
+.cfmt-check{flex-direction:row!important;align-items:center;gap:6px;font-size:11px;color:#a3b9ab;padding-bottom:9px}
+.cfmt-presets{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.cfmt-presets button{background:#1a3038;border:1px solid #2f4d54;border-radius:99px;color:#b6cdbf;font:11px Consolas,monospace;padding:5px 10px;cursor:pointer}
+.cfmt-presets button:hover{border-color:#6f9c84;color:#eaf5e4}
+.cfmt-screen{background:#0a171c;border:1px solid #23393f;border-radius:8px;padding:12px 14px}
+.cfmt-dots{display:block;height:6px;margin-bottom:6px;background-image:radial-gradient(#2b474d 1px,transparent 1px);background-size:8px 8px;opacity:.7}
+.cfmt-screen pre{margin:0;font:13px/1.8 Consolas,monospace;color:#f0d99a;white-space:pre-wrap;min-height:24px}
+.cfmt-screen pre.bad{color:#e6b39e;font-size:12px}
+.cfmt-screen p{margin:6px 0 0;font-size:11px;color:#8fa79a}
+
+/* 随堂小测 */
+.cquick{border-color:#b9a26a;background:#1d231d}
+.cquick-q{margin:0 0 10px;font-size:13px;line-height:1.8;color:#e6efdf}
+.cquick-opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.cquick-opts button{text-align:left;background:#0f1c1d;border:1px solid #35503f;border-radius:7px;color:#c8dbcb;font:12px/1.6 system-ui,sans-serif;padding:9px 11px;cursor:pointer}
+.cquick-opts button:hover{border-color:#7fa06f}
+.cquick-opts button.picked{border-color:#d9c07a}
+.cquick-opts button.right{border-color:#8fc47f;background:#1d3526;color:#e6f4dd}
+.cquick-why{margin:10px 0 0;font-size:12px;line-height:1.8;padding:9px 12px;border-radius:6px}
+.cquick-why.ok{background:#1a3324;color:#bfe0c2}
+.cquick-why.bad{background:#33241f;color:#e6b39e}
+
+@media(max-width:860px){
+  .c-goals{grid-template-columns:1fr}
+  .c-hero{grid-template-columns:1fr}
+  .ctrace-body,.cbuf-playfield{grid-template-columns:1fr}
+  .cmem-readout,.cascii-cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cbuf-vars{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .cfmt-inputs{grid-template-columns:1fr}
+  .cquick-opts{grid-template-columns:1fr}
+}
