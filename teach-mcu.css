@@ -27,3 +27,8 @@
 .code-wrap pre.code code{font:12.5px/1.85 Consolas,"Cascadia Code",monospace;color:#d7e6d6;background:none;border:0;padding:0;white-space:pre}
 .code-copy{position:absolute;right:10px;top:10px;background:#1e3a42;color:#cfe3d3;border:1px solid #35565a;border-radius:6px;font:11px/1 system-ui,sans-serif;padding:6px 10px;cursor:pointer;opacity:.85}
 .code-copy:hover{opacity:1;background:#27484f}
+
+/* 实验课：代码对照条 */
+.ws-code{background:#0a171c;border:1px solid #2b444a;border-radius:8px;padding:8px 0;margin:10px 0 14px;overflow:auto}
+.ws-code .cviz-line{padding:3px 12px;font:11.5px/1.7 Consolas,monospace}
+.ws-code .cviz-line code{white-space:pre-wrap;word-break:break-word}
