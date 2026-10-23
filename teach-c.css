@@ -246,3 +246,29 @@ body[data-teach-page="c-first"] .steps li::before{width:24px;height:24px;line-he
   .carr-readout,.cstr-readout{grid-template-columns:repeat(2,minmax(0,1fr))}
   .csort-tabs{margin-left:0;width:100%}
 }
+
+/* ---------- 代码 + 状态同步 ---------- */
+.cviz{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:14px;align-items:start;margin-top:6px}
+.cviz-code{background:#0a171c;border:1px solid #23393f;border-radius:8px;padding:8px 0;overflow:auto;max-height:330px}
+.cviz-line{display:flex;gap:10px;padding:3px 12px;font:12px/1.75 Consolas,monospace;color:#9fb3a8;transition:background .15s}
+.cviz-line i{color:#4f6a63;font-style:normal;width:14px;text-align:right;flex:none}
+.cviz-line code{background:none;border:0;padding:0;color:inherit;font:inherit;white-space:pre}
+.cviz-line.active{background:#1d3a32;color:#eaf6e2;box-shadow:inset 3px 0 0 #8ec47f}
+.cviz-vars{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.cviz-vars span{display:flex;flex-direction:column;gap:2px;background:#0a171c;border:1px solid #23393f;border-radius:6px;padding:5px 8px;min-width:62px}
+.cviz-vars small{font:10px Consolas,monospace;color:#a7c0b2;letter-spacing:.3px}
+.cviz-vars b{font:14px Consolas,monospace;color:#f0d99a}
+.cstr-progress{margin-left:auto;font:11px Consolas,monospace;color:#8fae9c}
+@media(max-width:860px){.cviz{grid-template-columns:1fr}.cviz-code{max-height:250px}}
+
+.carr-loop{margin-top:16px;border-top:1px solid #22383e;padding-top:14px}
+.carr-loop-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.carr-loop-head b{font-size:12px;color:#e4efdd}
+.carr-loop-head span{margin-left:auto;font:11px Consolas,monospace;color:#9fb6a7}
+.carr-out{background:#0a171c;border:1px solid #23393f;border-radius:8px;padding:8px 10px}
+.carr-out small{display:block;font:9px Consolas,monospace;color:#7f978b;margin-bottom:4px}
+.carr-out pre{margin:0;font:13px Consolas,monospace;color:#f0d99a;min-height:22px;white-space:pre-wrap}
+.carr-loop-controls{display:flex;align-items:center;gap:8px;margin-top:10px}
+.carr-loop-controls button{background:#1d3a42;color:#d6e6da;border:1px solid #365558;border-radius:7px;font:12px system-ui,sans-serif;padding:8px 12px;cursor:pointer}
+.carr-progress{margin-left:auto;font:11px Consolas,monospace;color:#8fae9c}
+.carr-cell.trace{border-color:#d9b96a;box-shadow:0 0 0 1px #d9b96a55}
