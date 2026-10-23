@@ -175,3 +175,74 @@ body[data-teach-page="c-first"] .steps li::before{width:24px;height:24px;line-he
   .cfmt-inputs{grid-template-columns:1fr}
   .cquick-opts{grid-template-columns:1fr}
 }
+
+/* ---------- 第二课组件 ---------- */
+.carr,.csort,.cgrid,.crec,.cstr{background:#101f26;color:#c9d8ce;border:1px solid #2b444a;border-radius:12px;padding:16px 18px;margin:20px 0;box-shadow:0 8px 24px #1b2f2614}
+.carr-head,.csort-head,.cgrid-head,.crec-head,.cstr-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.carr-head b,.csort-head b,.cgrid-head b,.crec-head b{font-size:13px;color:#e4efdd}
+.carr-toggle,.crec-result{margin-left:auto;font-size:11px;color:#93ab9c;display:flex;align-items:center;gap:6px}
+.crec-result{color:#f0d99a;font-family:Consolas,monospace}
+.carr-cells{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+.carr-cell{background:#0a171c;border:1px solid #23393f;border-radius:8px;padding:10px 8px;display:flex;flex-direction:column;align-items:center;gap:4px;color:#dbe9dd;cursor:pointer}
+.carr-cell small{font:10px/1 Consolas,monospace;color:#7f978b}
+.carr-cell b{font:16px/1.2 Consolas,monospace;color:#f0d99a}
+.carr-cell i{font:9px/1 system-ui,sans-serif;font-style:normal;color:#6f8a80}
+.carr-cell.on{border-color:#8ec47f;box-shadow:0 0 0 1px #8ec47f33}
+.carr-cell.danger{border-style:dashed;border-color:#8a5a4a;color:#e6b39e}
+.carr-cell.danger b{color:#e6b39e}
+.carr-readout{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:12px}
+.carr-readout>div{background:#0a171c;border:1px solid #23393f;border-radius:8px;padding:8px 10px}
+.carr-readout small{display:block;font-size:9px;color:#7f978b}
+.carr-readout b{font-size:12px;color:#eaf5e4}
+.carr-note,.csort-note,.cgrid-foot,.crec-note,.cstr-note{font-size:11.5px;color:#a7c0b2;line-height:1.8;margin:12px 0 0;min-height:20px}
+
+.csort-tabs{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap}
+.csort-tabs button{background:#1a3038;border:1px solid #2f4d54;border-radius:99px;color:#b6cdbf;font:11px system-ui,sans-serif;padding:5px 10px;cursor:pointer}
+.csort-tabs button.on{background:#2f5547;border-color:#8ec47f;color:#eaf5e4}
+.csort-bars{display:flex;align-items:flex-end;gap:10px;height:120px;padding:8px 4px;background:#0a171c;border:1px solid #23393f;border-radius:8px}
+.csort-bar{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;gap:4px}
+.csort-bar i{width:100%;background:#3c6b57;border-radius:4px 4px 0 0;transition:height .2s,background .2s}
+.csort-bar.compare i{background:#d9b96a}
+.csort-bar.swap i{background:#e08a6a}
+.csort-bar span{font:11px Consolas,monospace;color:#cfe0d2}
+.csort-cells{display:flex;gap:8px;justify-content:center;margin:10px 0 0}
+.csort-cells span{min-width:34px;text-align:center;padding:6px 8px;border-radius:6px;background:#0a171c;border:1px solid #23393f;font:12px Consolas,monospace;color:#cfe0d2}
+.csort-cells span.on{border-color:#d9b96a;color:#f0d99a}
+.csort-stats{font:11px/1.7 Consolas,monospace;color:#8fb3a1;margin-top:8px}
+.csort-controls,.crec-controls,.cstr-controls{display:flex;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap}
+.csort-controls button,.crec-controls button,.cstr-controls button{background:#1d3a42;color:#d6e6da;border:1px solid #365558;border-radius:7px;font:12px system-ui,sans-serif;padding:8px 12px;cursor:pointer}
+.csort-controls button:hover,.crec-controls button:hover{background:#27505a}
+.csort-progress,.crec-progress{margin-left:auto;font:11px Consolas,monospace;color:#8fae9c}
+
+.cgrid-head span{font:12px Consolas,monospace;color:#f0d99a}
+.cgrid-table{display:grid;grid-template-columns:34px repeat(4,minmax(0,1fr));gap:5px;background:#0a171c;border:1px solid #23393f;border-radius:8px;padding:10px}
+.cgrid-corner,.cgrid-headcell,.cgrid-rowlabel{display:flex;align-items:center;justify-content:center;font:10px Consolas,monospace;color:#7f978b}
+.cgrid-cell{background:#122830;border:1px solid #2b444a;border-radius:6px;padding:10px 4px;color:#dbe9dd;font:13px Consolas,monospace;cursor:pointer}
+.cgrid-cell.row{background:#16303a}
+.cgrid-cell.col{background:#173a34}
+.cgrid-cell.on{border-color:#8ec47f;background:#22463a;color:#f0f9e8}
+
+.crec-stack{display:flex;flex-direction:column-reverse;gap:6px;background:#0a171c;border:1px solid #23393f;border-radius:8px;padding:12px;min-height:120px}
+.crec-frame{display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid #2b444a;border-radius:6px;background:#122830}
+.crec-frame.top{border-color:#8ec47f;background:#1c3a2e}
+.crec-frame span{font:13px Consolas,monospace;color:#eaf5e4}
+.crec-frame small{margin-left:auto;font:10.5px system-ui,sans-serif;color:#9fb6a7}
+.crec-empty{color:#8fae9c;font:12px system-ui,sans-serif;text-align:center;padding:28px 0}
+
+.cstr-head label{display:flex;flex-direction:column;gap:4px;font-size:10px;color:#93ab9c}
+.cstr-head input{background:#0a171c;border:1px solid #365558;border-radius:6px;color:#e7f2e2;font:13px Consolas,monospace;padding:8px 10px;min-width:180px}
+.cstr-cells{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}
+.cstr-cell{min-width:38px;text-align:center;padding:8px 6px;border-radius:6px;background:#0a171c;border:1px solid #23393f;font:14px Consolas,monospace;color:#dbe9dd;display:flex;flex-direction:column;gap:3px}
+.cstr-cell small{font:9px Consolas,monospace;color:#6f8a80}
+.cstr-cell.term{color:#f0d99a;border-color:#5b4f2f;background:#1e2119}
+.cstr-cell.on{border-color:#8ec47f;box-shadow:0 0 0 1px #8ec47f44;background:#1c3a2e}
+.cstr-readout{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:10px}
+.cstr-readout>div{background:#0a171c;border:1px solid #23393f;border-radius:8px;padding:8px 10px}
+.cstr-readout small{display:block;font-size:9px;color:#7f978b}
+.cstr-readout b{font-size:12px;color:#eaf5e4;font-family:Consolas,monospace}
+
+@media(max-width:860px){
+  .carr-cells{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .carr-readout,.cstr-readout{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .csort-tabs{margin-left:0;width:100%}
+}
