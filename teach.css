@@ -253,3 +253,21 @@ input[type=range]{width:100%;accent-color:#acdfc4}
   .pager.next{text-align:left}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ---------- C 语言第一课 ---------- */
+.c-output{margin:-6px 0 18px;border-left:2px solid #4f7a63;background:#12211c;padding:10px 14px;border-radius:0 4px 4px 0}
+.c-output b{display:block;font:9px/1.6 Consolas,monospace;letter-spacing:1.4px;color:#7e968d;margin-bottom:5px}
+.c-output pre{margin:0;font:12px/1.75 Consolas,monospace;color:#bfe0c8;white-space:pre-wrap;word-break:break-word}
+.printf-lab{border:1px solid #26393d;border-radius:6px;background:#101f23;padding:14px}
+.printf-inputs{display:grid;grid-template-columns:1.1fr 1fr auto;gap:12px;align-items:end}
+.printf-inputs label{display:flex;flex-direction:column;gap:5px;font-size:10px;color:#8ba99b}
+.printf-inputs input[type=text]{background:#0b1619;border:1px solid #36504b;border-radius:3px;color:#e4ede4;font:13px/1.4 Consolas,monospace;padding:8px 10px}
+.printf-inputs .check{flex-direction:row;align-items:center;gap:6px;font-size:11px;color:#b9cbc0;padding-bottom:8px}
+.printf-presets{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.printf-presets button{background:#132226;border:1px solid #2b403d;border-radius:99px;color:#a9c0b6;font:11px/1 Consolas,monospace;padding:5px 10px;cursor:pointer}
+.printf-presets button:hover{border-color:#749e83;color:#e4ede4}
+.printf-out{background:#0a1417;border:1px solid #2b403d;border-radius:4px;padding:12px 14px;overflow:auto}
+.printf-out pre{margin:0;font:13px/1.7 Consolas,monospace;color:#e7d7a8;white-space:pre}
+.printf-out pre.bad{color:#e6b39e;font-size:12px;white-space:pre-wrap}
+.printf-lab .quiet{font-size:11px;color:#7e968d;margin:8px 0 0}
+@media(max-width:760px){.printf-inputs{grid-template-columns:1fr}}
