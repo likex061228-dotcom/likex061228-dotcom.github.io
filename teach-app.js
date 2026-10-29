@@ -1301,19 +1301,19 @@ HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, ${i.level==="high"?"GPIO_PIN_SET":"GPIO_PI
         </dl></div>
         <div><h4>\u2461 \u751F\u6210\u7684 HAL \u4EE3\u7801</h4><pre class="code"><code>${$(Mt(l,s.name,c))}</code></pre></div>
         <div><h4>\u2462 \u5BC4\u5B58\u5668\u4F4D\uFF08\u53EA\u663E\u793A\u8BE5\u5F15\u811A\uFF09</h4><p class="quiet">${$(it(l,s.name,c).model)}\uFF1B\u52A0\u7C97\u4F4D\u5C5E\u4E8E\u6240\u9009\u5F15\u811A\uFF0C\u5176\u4F59\u6309 0 \u663E\u793A\u3002</p><div class="reg-list">${r(s,c)}</div></div>
-      </div>`,t.querySelectorAll("[data-chip]").forEach(h=>h.onclick=()=>{e.chip=h.dataset.chip,e.pin=i().demo.ledPin,e.cfg=n(e.pin),d()}),t.querySelectorAll("[data-pin]").forEach(h=>h.onclick=()=>{e.pin=h.dataset.pin,e.cfg=n(e.pin),d()}),t.querySelectorAll("select[data-cfg]").forEach(h=>h.onchange=()=>{e.cfg[h.dataset.cfg]=h.value,d()}),t.querySelectorAll("[data-level]").forEach(h=>h.onclick=()=>{e.cfg.level=h.dataset.level,d()})}d()}function Ji(t){let e=[{port:"PA12",chip:"F103C8T6",note:"\u7CBE\u70751\u5E95\u677FKEY4\uFF0CEXTI12\uFF1B\u4E0D\u542F\u7528USB"},{port:"PB0",chip:"F103C8T6",note:"Blue Pill \u65E0\u677F\u8F7D\u6309\u952E\uFF0C\u53EF\u5916\u63A5"},{port:"PC13",chip:"F103C8T6",note:"\u7CBE\u70751\u6838\u5FC3\u677FD2\uFF0CEXTI13\u4EC5\u4F5C\u5F15\u811A\u7F16\u53F7\u8BF4\u660E"}],i=0;function a(){t.innerHTML=`<div class="exti-line">
-      <div class="exti-pins">${e.map((n,o)=>`<button type="button" class="${o===i?"on":""}" data-o="${o}"><b>${n.port}</b><small>${n.note}</small></button>`).join("")}</div>
+      </div>`,t.querySelectorAll("[data-chip]").forEach(h=>h.onclick=()=>{e.chip=h.dataset.chip,e.pin=i().demo.ledPin,e.cfg=n(e.pin),d()}),t.querySelectorAll("[data-pin]").forEach(h=>h.onclick=()=>{e.pin=h.dataset.pin,e.cfg=n(e.pin),d()}),t.querySelectorAll("select[data-cfg]").forEach(h=>h.onchange=()=>{e.cfg[h.dataset.cfg]=h.value,d()}),t.querySelectorAll("[data-level]").forEach(h=>h.onclick=()=>{e.cfg.level=h.dataset.level,d()})}d()}function Ji(t){let e=[{port:"PA12",chip:"F103C8T6",note:"\u7CBE\u70751\u5E95\u677FKEY4\uFF0CEXTI12\uFF1B\u4E0D\u542F\u7528USB"},{port:"PB12",chip:"F103C8T6",note:"\u540C\u7F16\u53F7\u7AEF\u53E3\u5BF9\u6BD4\uFF1A\u4E0D\u662FKEY4\u5B9E\u9645\u63A5\u7EBF"},{port:"PC13",chip:"F103C8T6",note:"\u7CBE\u70751\u6838\u5FC3\u677FD2\uFF0CEXTI13\u4EC5\u4F5C\u5F15\u811A\u7F16\u53F7\u8BF4\u660E"}],i=0;function a(){let n=Number(e[i].port.slice(2)),o=n<=4?6+n:n<=9?23:40,r=n<=4?`EXTI${n}_IRQHandler`:n<=9?"EXTI9_5_IRQHandler":"EXTI15_10_IRQHandler";t.innerHTML=`<div class="exti-line">
+      <div class="exti-pins">${e.map((d,s)=>`<button type="button" class="${s===i?"on":""}" data-o="${s}"><b>${d.port}</b><small>${d.note}</small></button>`).join("")}</div>
       <div class="exti-flow">
         <div class="box">\u9009\u4E2D\u5F15\u811A<br><b>${e[i].port}</b></div>
         <div class="arrow">\u2192</div>
-        <div class="box accent">\u8FB9\u6CBF\u68C0\u6D4B<br><b>EXTI0</b></div>
+        <div class="box accent">\u8FB9\u6CBF\u68C0\u6D4B<br><b>EXTI${n}</b></div>
         <div class="arrow">\u2192</div>
-        <div class="box">NVIC<br><b>IRQ 0</b></div>
+        <div class="box">NVIC<br><b>IRQ ${o}</b></div>
         <div class="arrow">\u2192</div>
-        <div class="box">CPU \u8DF3\u8F6C<br><b>EXTI0_IRQHandler</b></div>
+        <div class="box">CPU \u8DF3\u8F6C<br><b>${r}</b></div>
       </div>
       <p class="quiet">EXTI \u7EBF\u6309\u5F15\u811A\u7F16\u53F7\u5206\u7EC4\uFF1APA0\u3001PB0\u3001PC0\u2026 \u5171\u7528 <b>EXTI0</b>\uFF0C\u540C\u4E00\u65F6\u523B\u53EA\u80FD\u9009\u4E00\u4E2A\u7AEF\u53E3\u3002\u6362\u7AEF\u53E3\u65F6\u5FC5\u987B\u6539 AFIO\uFF08F1\uFF09/SYSCFG\uFF08F4\uFF09\u7684 EXTICR\uFF0CCubeMX \u4F1A\u81EA\u52A8\u751F\u6210\u8FD9\u6BB5\u914D\u7F6E\u3002</p>
-    </div>`,t.querySelectorAll("[data-o]").forEach(n=>n.onclick=()=>{i=Number(n.dataset.o),a()})}a()}function Zi(t){let e={bounceMs:12,pressMs:300,edge:"falling",debounce:!1};t.innerHTML=`
+    </div>`,t.querySelectorAll("[data-o]").forEach(d=>d.onclick=()=>{i=Number(d.dataset.o),a()})}a()}function Zi(t){let e={bounceMs:12,pressMs:300,edge:"falling",debounce:!1};t.innerHTML=`
     <div class="lab-grid">
       <div class="canvas-wrap"><canvas id="exti-canvas"></canvas></div>
       <div class="lab-controls">
